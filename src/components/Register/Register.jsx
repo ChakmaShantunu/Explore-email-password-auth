@@ -1,10 +1,15 @@
 
 
 const Register = () => {
+
+    const handleRegister = e => {
+        e.preventDefault();
+        console.log("form submitted");
+    }
     return (
         <div>
             <h2 className="text-2xl">this is register</h2>
-            <form>
+            <form onSubmit={handleRegister}>
 
                 {/* email submit */}
                 <div className="join">
@@ -27,7 +32,7 @@ const Register = () => {
                         <div className="validator-hint hidden">Enter valid email address</div>
                     </div>
                     {/* <button className="btn btn-neutral join-item">Register</button> */}
-                </div>
+                </div> <br />
 
                 {/* password submit */}
                 <div className="join">
