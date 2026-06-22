@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h2>Explore email and password auth</h2>
+      <h2 className='text-3xl text-center'>Explore email and password auth</h2>
       
     </>
   )
