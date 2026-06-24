@@ -18,6 +18,13 @@ const Register = () => {
         setSuccess(false);
         setErrorMessage('');
 
+        const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (passwordRegExp.test(password) === false) {
+            setErrorMessage("Password Must have 8 Characters, one small letter, one capital letter, one number & one special character");
+            return;
+        }
+
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 console.log(result);
