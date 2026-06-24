@@ -1,9 +1,12 @@
 import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
 import { auth } from "../../firebase/firebase.init";
 import { useState } from "react";
+import { FaEye } from "react-icons/fa";
 
 
 const Register = () => {
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const [success, setSuccess] = useState(false);
 
@@ -38,7 +41,7 @@ const Register = () => {
 
 
     return (
-        <div className="max-w-3xl border p-4 mt-12 flex justify-center mx-auto">
+        <div className="border p-4 mt-12 flex justify-center mx-auto">
             <div>
                 {/* <h2 className="text-2xl">this is register</h2> */}
                 <form className="space-y-4" onSubmit={handleRegister}>
@@ -82,9 +85,12 @@ const Register = () => {
                                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                                     </g>
                                 </svg>
-                                <input type="password" name="password" placeholder="password" required />
+                                <div className="relative">
+                                    <input type={showPassword ? 'text' : 'password'} name="password" placeholder="password" required />
+                                    <button onClick={() => setShowPassword(!showPassword)} className="btm btn-xs absolute right-1 top-1"><FaEye /></button>
+                                </div>
                             </label>
-                            <div className="validator-hint hidden">Enter valid email address</div>
+                            <div><a href="" className="link link-hover">Forget Password</a></div>
                         </div>
                     </div><br />
                     <input type="submit" className="btn btn-primary" value="Submit" />
