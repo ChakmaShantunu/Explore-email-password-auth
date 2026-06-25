@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
 import { auth } from "../../firebase/firebase.init";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
+import { Link } from "react-router";
 
 
 const Register = () => {
@@ -22,7 +23,7 @@ const Register = () => {
         setSuccess(false);
         setErrorMessage('');
 
-        if(!terms) {
+        if (!terms) {
             setErrorMessage("Please accept terms & conditions");
             return;
         }
@@ -105,6 +106,8 @@ const Register = () => {
                     </label><br />
                     <input type="submit" className="btn btn-primary" value="Submit" />
                 </form>
+
+                <p>Already have an account? Please <Link className="text-shadow-blue-600 underline" to="/login">Login</Link></p>
 
                 {
                     errorMessage && <p className="text-red-500">{errorMessage}</p>
