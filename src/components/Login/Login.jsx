@@ -1,6 +1,11 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase.init";
+import { useState } from "react";
 
 
 const Login = () => {
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = e => {
         e.preventDefault();
@@ -8,6 +13,20 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(email, password);
+
+        // reset
+        setErrorMessage('');
+
+
+        // login user
+        signInWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                console.log(result.user);
+            })
+            .catch((error) => {
+                console.log(error);
+                setErrorMessage(error.message);
+            })
 
     }
     return (
@@ -23,7 +42,12 @@ const Login = () => {
                     <div><a className="link link-hover">Forgot password?</a></div>
                     <button className="btn btn-neutral mt-4">Login</button>
                 </form>
+                {
+                    errorMessage && <p className="text-red-400">{errorMessage}</p>
+                }
+
             </div>
+
         </div>
 
     );
