@@ -6,6 +6,7 @@ import { useState } from "react";
 const Login = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const handleLogin = e => {
         e.preventDefault();
@@ -16,12 +17,14 @@ const Login = () => {
 
         // reset
         setErrorMessage('');
+        setSuccess(false);
 
 
         // login user
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 console.log(result.user);
+                setSuccess(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -44,6 +47,10 @@ const Login = () => {
                 </form>
                 {
                     errorMessage && <p className="text-red-400">{errorMessage}</p>
+                }
+
+                {
+                    success && <p className="text-green-500">User logged in successfully</p>
                 }
 
             </div>
