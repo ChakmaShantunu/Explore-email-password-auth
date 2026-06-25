@@ -16,10 +16,16 @@ const Register = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password);
+        const terms = e.target.terms.checked;
+        console.log(email, password, terms);
 
         setSuccess(false);
         setErrorMessage('');
+
+        if(!terms) {
+            setErrorMessage("Please accept terms & conditions");
+            return;
+        }
 
         const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -93,6 +99,10 @@ const Register = () => {
                             <div><a href="" className="link link-hover">Forget Password</a></div>
                         </div>
                     </div><br />
+                    <label className="label">
+                        <input type="checkbox" name="terms" className="checkbox" />
+                        Accept terms & condition
+                    </label><br />
                     <input type="submit" className="btn btn-primary" value="Submit" />
                 </form>
 
