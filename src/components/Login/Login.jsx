@@ -25,6 +25,7 @@ const Login = () => {
             .then((result) => {
                 console.log(result.user);
                 setSuccess(true);
+                e.target.reset();
             })
             .catch((error) => {
                 console.log(error);
