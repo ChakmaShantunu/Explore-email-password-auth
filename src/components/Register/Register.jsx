@@ -1,8 +1,9 @@
-import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
+import { sendEmailVerification } from "firebase/auth";
 
 
 const Register = () => {
@@ -35,10 +36,17 @@ const Register = () => {
             return;
         }
 
+        // create user
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 console.log(result);
-                setSuccess(true)
+
+                // email verify
+                sendEmailVerification(result.user)
+                    .then(() => {
+                        setSuccess(true);
+                        alert("We have sent a verification email. Please check your email");
+                    })
             })
             .catch((error) => {
                 console.log(error);

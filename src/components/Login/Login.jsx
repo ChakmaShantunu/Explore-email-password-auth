@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { useState } from "react";
+import { Link } from "react-router";
 
 
 const Login = () => {
@@ -40,12 +41,14 @@ const Login = () => {
                 <h1 className="text-4xl font-bold">Login now!</h1>
                 <form onSubmit={handleLogin} className="fieldset">
                     <label className="label">Email</label>
-                    <input type="email" name="email" className="input" placeholder="Email" autoComplete="email" required/>
+                    <input type="email" name="email" className="input" placeholder="Email" autoComplete="email" required />
                     <label className="label">Password</label>
-                    <input type="password" name="password" className="input" autoComplete="current-password" placeholder="Password" required/>
+                    <input type="password" name="password" className="input" autoComplete="current-password" placeholder="Password" required />
                     <div><a className="link link-hover">Forgot password?</a></div>
                     <button className="btn btn-neutral mt-4">Login</button>
                 </form>
+
+                <p>New to this website? Please <Link to="/register" className="underline">Register</Link></p>
                 {
                     errorMessage && <p className="text-red-400">{errorMessage}</p>
                 }
