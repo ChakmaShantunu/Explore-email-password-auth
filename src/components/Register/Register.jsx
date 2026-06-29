@@ -125,7 +125,7 @@ const Register = () => {
                                     <button onClick={() => setShowPassword(!showPassword)} className="btm btn-xs absolute right-1 top-1"><FaEye /></button>
                                 </div>
                             </label>
-                            <div><a href="" className="link link-hover">Forget Password</a></div>
+                            
                         </div>
                     </div><br />
                     <label className="label">
