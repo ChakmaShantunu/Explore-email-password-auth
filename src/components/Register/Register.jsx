@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
@@ -16,6 +16,8 @@ const Register = () => {
 
     const handleRegister = e => {
         e.preventDefault();
+        const name = e.target.name.value;
+        const photo = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const terms = e.target.terms.checked;
@@ -47,6 +49,19 @@ const Register = () => {
                         setSuccess(true);
                         alert("We have sent a verification email. Please check your email");
                     })
+
+                //update user profile
+                const profile = {
+                    displayName: name,
+                    photoURL: photo
+                }
+                updateProfile(auth.currentUser, profile)
+                    .then(() => {
+                        console.log("User profile updated");
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    })
             })
             .catch((error) => {
                 console.log(error);
@@ -64,6 +79,10 @@ const Register = () => {
                     {/* email submit */}
                     <div className="join">
                         <div>
+                            <label className="label p-2">Name</label>
+                            <input type="text" name="name" className="input" placeholder="Your Name" /><br />
+                            <label className="label my-4 p-2">Photo Url</label>
+                            <input type="text" name="photo" className="input" placeholder="Photo URL" />
                             <label className="input validator join-item">
                                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <g
@@ -79,6 +98,7 @@ const Register = () => {
                                 </svg>
                                 <input type="email" name="email" placeholder="mail@site.com" required />
                             </label>
+
                             <div className="validator-hint hidden">Enter valid email address</div>
                         </div>
                         {/* <button className="btn btn-neutral join-item">Register</button> */}
